@@ -1,0 +1,75 @@
+<form #contactForm='ngForm' (ngSubmit)='onSubmit(contactForm.value)' class="container">
+  <div class="mb-3">
+    <label for="firstName" class="form-label">First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      aria-describedby="emailHelp"
+      placeholder="Enter your First Name"
+      name="firstName"
+      ngModel
+      #firstName = 'ngModel'
+      (change) = "log(firstName)"
+      required
+      minlength="3"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your Last Name"
+    ngModel
+    #lastName = 'ngModel'
+    (change) = "log(lastName)"
+    required
+    minlength="3"/>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email"
+    ngModel
+    #email = 'ngModel'
+    (change) = "log(email)"
+    required
+    email
+    />
+  </div>
+  <div id="emailHelp" class="form-text">
+    We'll never share your email with anyone else.
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+    ngModel
+    #gender = 'ngModel'
+    (change) = "log(gender)"
+    required
+    />
+    <label class="form-check-label" for="male"> Male </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input"type="radio" name="gender" id="female" value="female"
+    ngModel
+    #gender = 'ngModel'
+    (change) = "log(gender)"
+    required 
+    />
+    <label class="form-check-label" for="female"> Female </label>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="isMarried" name="isMarried"
+    ngModel
+    #isMarried = 'ngModel'
+    (change) = "log(isMarried)"
+    />
+    <label class="form-check-label" for="married">Married</label>
+  </div>
+  <select class="form-select" aria-label="Default select example"name="country" id="country" 
+  ngModel
+  #country = 'ngModel'
+  (change) = "log(country)"
+  required 
+  >
+      <option *ngFor="let country of countries">{{ country.name }}</option>
+  </select>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
