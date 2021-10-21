@@ -1,4 +1,4 @@
-<form #contactForm='ngForm' (ngSubmit)='onSubmit(contactForm.value)' class="container">
+<form #contactForm='ngForm' (ngSubmit)='onSubmit(contactForm.value);contactForm.reset()' class="container">
   <div class="mb-3">
     <label for="firstName" class="form-label">First Name</label>
     <input
@@ -15,6 +15,10 @@
       minlength="3"
     />
   </div>
+  <div class="d-flex justify-content-center errors" *ngIf='firstName.invalid && firstName.touched'>
+      <div *ngIf='firstName.errors?.required'>* First name is required *</div>
+      <div *ngIf='firstName.errors?.minlength'>* First name minlength is {{firstName.errors?.minlength.requiredLength}} *</div>
+  </div>
   <div class="mb-3">
     <label for="lastName" class="form-label">Last Name</label>
     <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your Last Name"
@@ -23,6 +27,10 @@
     (change) = "log(lastName)"
     required
     minlength="3"/>
+  </div>
+  <div class="d-flex justify-content-center errors" *ngIf='lastName.invalid && lastName.touched'>
+      <div *ngIf='lastName.errors?.required'>* Last name is required *</div>
+      <div *ngIf='lastName.errors?.minlength'>* Last name minlength is {{lastName.errors?.minlength.requiredLength}} *</div>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
@@ -34,6 +42,10 @@
     email
     />
   </div>
+  <div class="d-flex justify-content-center errors" *ngIf='email.invalid && email.touched'>
+    <div *ngIf='email.errors?.required'>* Email is required *</div>
+    <div *ngIf='email.errors?.email'>* Email is wrong *</div>
+</div>
   <div id="emailHelp" class="form-text">
     We'll never share your email with anyone else.
   </div>
@@ -71,5 +83,8 @@
   >
       <option *ngFor="let country of countries">{{ country.name }}</option>
   </select>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="d-flex justify-content-center errors" *ngIf='country.invalid && country.touched'>
+    <div *ngIf='country.errors?.required'>* country is required *</div>
+</div>
+  <button type="submit" class="btn btn-primary" [disabled]='contactForm.invalid'>Submit</button>
 </form>

@@ -24,6 +24,7 @@ log(x:any){
 onSubmit(y:any){
   console.log(y)
 }
+
   ngOnInit(): void {
   }
 
